@@ -113,7 +113,7 @@ export function Programs() {
                 className={`flex h-full flex-col rounded-[var(--radius-card)] p-8 ${
                   t.featured
                     ? "bg-ink text-paper"
-                    : "border border-ink/12 bg-canvas text-ink"
+                    : "border border-ink/12 bg-canvas text-ink transition-colors duration-200 hover:border-ink/25"
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -130,7 +130,7 @@ export function Programs() {
                 <h3 className="mt-6 text-[26px] font-black">{t.phase}</h3>
                 <p
                   className={`mt-1 text-[13.5px] tracking-[0.02em] ${
-                    t.featured ? "text-muted-d" : "text-ink/45"
+                    t.featured ? "text-muted-d" : "text-ink/55"
                   }`}
                 >
                   {t.en}
@@ -151,7 +151,7 @@ export function Programs() {
                 >
                   <p
                     className={`text-[12.5px] ${
-                      t.featured ? "text-muted-d" : "text-ink/45"
+                      t.featured ? "text-muted-d" : "text-ink/55"
                     }`}
                   >
                     {t.validity}
@@ -210,7 +210,7 @@ export function Programs() {
             <div className="overflow-x-auto px-3 pb-3 sm:px-5 sm:pb-5">
               <table className="w-full min-w-[560px] border-collapse text-left">
                 <thead>
-                  <tr className="text-[13px] text-ink/45">
+                  <tr className="text-[13px] text-ink/55">
                     <th className="py-3 pl-4 font-semibold">{table.head[0]}</th>
                     {table.head.slice(1).map((h) => (
                       <th

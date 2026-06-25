@@ -12,7 +12,7 @@ export function Hero() {
       <StarPoints className="absolute inset-0" />
       {/* soft green glow anchored to the wave, not a generic AI blob */}
       <div
-        className="pointer-events-none absolute -right-20 top-1/2 h-[560px] w-[560px] -translate-y-1/2 rounded-full opacity-[0.16] blur-[120px]"
+        className="pointer-events-none absolute -right-24 top-[58%] h-[320px] w-[320px] -translate-y-1/2 rounded-full opacity-[0.10] blur-[110px] sm:top-1/2 sm:h-[560px] sm:w-[560px] sm:opacity-[0.16]"
         style={{ background: "var(--color-green)" }}
         aria-hidden
       />

@@ -57,7 +57,7 @@ export function TwoPaths() {
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           {paths.map((p, i) => (
             <Reveal key={p.tag} delay={i * 0.08}>
-              <article className="flex h-full flex-col rounded-[var(--radius-card)] border border-ink/12 bg-paper p-7 sm:p-9">
+              <article className="flex h-full flex-col rounded-[var(--radius-card)] border border-ink/12 bg-paper p-7 transition-colors duration-200 hover:border-ink/25 sm:p-9">
                 <div className="flex items-center gap-4">
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-paper">
                     <p.Icon size={24} weight="bold" />
@@ -70,10 +70,10 @@ export function TwoPaths() {
                 <h3 className="mt-6 text-[22px] font-black leading-snug">
                   {p.title}
                 </h3>
-                <p className="mt-2 text-[14.5px] text-ink/55">{p.who}</p>
+                <p className="mt-2 text-[14.5px] text-ink/65">{p.who}</p>
 
                 <div className="mt-7 border-t border-ink/10 pt-6">
-                  <p className="mb-3 text-[13px] font-bold tracking-[0.04em] text-ink/45">
+                  <p className="mb-3 text-[13px] font-bold tracking-[0.04em] text-ink/55">
                     你的处境
                   </p>
                   <ul className="space-y-2.5">

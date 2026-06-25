@@ -77,7 +77,7 @@ export function Toolkit() {
           {/* item cells */}
           {items.map((it, i) => (
             <Reveal key={it.title} delay={0.04 * i}>
-              <article className="flex h-full flex-col rounded-[var(--radius-card)] border border-ink/12 bg-paper p-7">
+              <article className="flex h-full flex-col rounded-[var(--radius-card)] border border-ink/12 bg-paper p-7 transition-colors duration-200 hover:border-ink/25">
                 <p className="font-display text-[12px] font-bold tracking-[0.12em] text-green-deep">
                   {it.sub}
                 </p>
@@ -93,7 +93,7 @@ export function Toolkit() {
         </div>
 
         <Reveal delay={0.05}>
-          <p className="mt-6 text-[14px] text-ink/45">
+          <p className="mt-6 text-[14px] text-ink/55">
             更多:行业就活时间轴、测试中心单词集、企业地图细分页、成长经历整理页等,
             将在咨询与服务过程中逐步开放。
           </p>
