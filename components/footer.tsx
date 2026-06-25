@@ -19,11 +19,22 @@ const cols = [
     ],
   },
   {
-    h: "关于",
+    h: "了解",
     links: [
       { label: "为什么是先手", href: "#positioning" },
       { label: "差异化壁垒", href: "#moat" },
-      { label: "服务流程", href: "#process" },
+      { label: "学员实绩", href: "#proof" },
+      { label: "常见问题", href: "#faq" },
+    ],
+  },
+  {
+    h: "关注",
+    // TODO 替换为真实社媒主页链接
+    links: [
+      { label: "小红书", href: "#" },
+      { label: "抖音", href: "#" },
+      { label: "视频号", href: "#" },
+      { label: "微信公众号", href: "#" },
     ],
   },
 ];
@@ -32,7 +43,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-ink text-paper">
       <div className="mx-auto max-w-[1240px] px-5 py-16 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
           <div>
             <div className="flex items-center gap-3">
               <SenteMark className="h-9 w-auto" />
@@ -48,9 +59,15 @@ export function Footer() {
               <br className="hidden sm:block" />
               日本就职生涯规划品牌。
             </p>
+            <a
+              href="#contact"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-green px-4 py-2 text-[14px] font-bold text-ink transition-[filter] hover:brightness-[1.06]"
+            >
+              加微信咨询
+            </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {cols.map((c) => (
               <div key={c.h}>
                 <p className="mb-4 text-[13px] font-bold tracking-[0.08em] text-muted-d">
@@ -61,7 +78,7 @@ export function Footer() {
                     <li key={l.label}>
                       <a
                         href={l.href}
-                        className="text-[14px] text-[#cfccc0] transition-colors hover:text-green-bright"
+                        className="inline-block py-0.5 text-[14px] text-[#cfccc0] transition-colors hover:text-green-bright"
                       >
                         {l.label}
                       </a>
@@ -73,11 +90,17 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-7 text-[12.5px] tracking-[0.04em] text-muted-d sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-7 text-[12.5px] tracking-[0.04em] text-muted-d sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 先手就职 SENTE CAREER · 知日教育集团出品</span>
-          <span className="font-display uppercase tracking-[0.18em]">
-            Career is limitless
-          </span>
+          <div className="flex items-center gap-5">
+            {/* TODO 接入真实隐私政策页 */}
+            <a href="#" className="transition-colors hover:text-paper">
+              隐私政策
+            </a>
+            <span className="font-display uppercase tracking-[0.18em]">
+              Career is limitless
+            </span>
+          </div>
         </div>
       </div>
     </footer>

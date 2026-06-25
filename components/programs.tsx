@@ -1,5 +1,6 @@
 import { Reveal } from "./reveal";
 import { Button } from "./button";
+import { BoardProgress } from "./brand";
 import { CaretDown } from "@phosphor-icons/react/dist/ssr";
 
 type Tier = {
@@ -92,19 +93,24 @@ export function Programs() {
   return (
     <section id="programs" className="bg-paper">
       <div className="mx-auto max-w-[1240px] px-5 py-24 sm:px-8 lg:py-32">
-        <Reveal>
-          <div className="mb-6 flex items-center gap-3 text-[12.5px] font-semibold tracking-[0.16em] text-green-deep">
-            <span className="h-px w-8 bg-green" />
-            <span className="font-display uppercase">The Board</span>
-          </div>
-          <h2 className="max-w-3xl text-[clamp(1.9rem,4.2vw,3rem)] font-black leading-[1.12]">
-            把整局棋,拆成三步落子。
-          </h2>
-          <p className="mt-5 max-w-xl text-[16.5px] leading-relaxed text-ink/70">
-            从看清方向到高手对弈,三档服务对应就职布局的三个阶段。
-            具体价格与方案,按你的年级与目标在咨询时定。
-          </p>
-        </Reveal>
+        <div className="grid gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-center">
+          <Reveal>
+            <div className="mb-6 flex items-center gap-3 text-[12.5px] font-semibold tracking-[0.16em] text-green-deep">
+              <span className="h-px w-8 bg-green" />
+              <span className="font-display uppercase">The Board</span>
+            </div>
+            <h2 className="max-w-2xl text-[clamp(1.9rem,4.2vw,3rem)] font-black leading-[1.12]">
+              把整局棋,拆成三步落子。
+            </h2>
+            <p className="mt-5 max-w-xl text-[16.5px] leading-relaxed text-ink/70">
+              从看清方向到高手对弈,三档服务对应就职布局的三个阶段。
+              具体价格与方案,按你的年级与目标在咨询时定。
+            </p>
+          </Reveal>
+          <Reveal delay={0.1} className="hidden lg:block">
+            <BoardProgress className="ml-auto w-full max-w-[280px]" />
+          </Reveal>
+        </div>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {tiers.map((t, i) => (

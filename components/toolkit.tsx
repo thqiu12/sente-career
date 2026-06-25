@@ -68,8 +68,8 @@ export function Toolkit() {
                 14+
               </p>
               <p className="mt-3 text-[15.5px] font-bold leading-snug">
-                套模板、题库与行业图谱,
-                覆盖 ES、面试、笔试、行研全流程。
+                套可复用的模板、题库与行业图谱,
+                ES、面试、笔试、行研每一步都有据可依。
               </p>
             </div>
           </Reveal>

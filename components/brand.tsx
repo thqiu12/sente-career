@@ -139,6 +139,73 @@ export function StepWave({
   );
 }
 
+/* 棋局进度图 — a go board with three rising stones (L1→L2→L3) */
+export function BoardProgress({ className }: { className?: string }) {
+  const coords = [20, 56, 92, 128, 164, 200];
+  const stones = [
+    { x: 56, y: 164, lv: "L1" },
+    { x: 128, y: 92, lv: "L2" },
+    { x: 164, y: 56, lv: "L3" },
+  ];
+  return (
+    <svg viewBox="0 0 220 220" className={className} aria-hidden>
+      {coords.map((c) => (
+        <line
+          key={`h${c}`}
+          x1="20"
+          y1={c}
+          x2="200"
+          y2={c}
+          stroke="var(--color-ink)"
+          strokeOpacity="0.14"
+          strokeWidth="1"
+        />
+      ))}
+      {coords.map((c) => (
+        <line
+          key={`v${c}`}
+          x1={c}
+          y1="20"
+          x2={c}
+          y2="200"
+          stroke="var(--color-ink)"
+          strokeOpacity="0.14"
+          strokeWidth="1"
+        />
+      ))}
+      <polyline
+        points={stones.map((s) => `${s.x},${s.y}`).join(" ")}
+        fill="none"
+        stroke="var(--color-green)"
+        strokeOpacity="0.5"
+        strokeWidth="2"
+        strokeDasharray="3 5"
+      />
+      {stones.map((s, i) => (
+        <g key={s.lv}>
+          <circle
+            cx={s.x}
+            cy={s.y}
+            r={i === 2 ? 13 : 11}
+            fill="var(--color-green)"
+          />
+          <text
+            x={s.x}
+            y={s.y + 4}
+            textAnchor="middle"
+            fontSize="11"
+            fontWeight="800"
+            fill="var(--color-ink)"
+            fontFamily="var(--font-archivo)"
+          >
+            {s.lv}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 /* 碁盘 star points (9 点) overlay for hero */
 export function StarPoints({ className }: { className?: string }) {
   const pts = [25, 50, 75];

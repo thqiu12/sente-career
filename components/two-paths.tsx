@@ -1,4 +1,5 @@
 import { Reveal } from "./reveal";
+import { Button } from "./button";
 import {
   Compass,
   MapTrifold,
@@ -21,6 +22,7 @@ const paths = [
       "商务日语 + ES + 面试,系统化闭环训练",
       "3-6 个月长期实习匹配,补齐最大短板",
     ],
+    cta: "我已在日本,聊聊布局",
   },
   {
     tag: "B",
@@ -37,6 +39,7 @@ const paths = [
       "选校选专业对齐目标行业与赛道",
       "入学即启动布局,留学全程都是就职的铺垫",
     ],
+    cta: "我要赴日,提前规划",
   },
 ];
 
@@ -106,6 +109,14 @@ export function TwoPaths() {
                     ))}
                   </ul>
                 </div>
+
+                <Button
+                  href="#contact"
+                  variant="ghost-light"
+                  className="mt-6 w-full"
+                >
+                  {p.cta}
+                </Button>
               </article>
             </Reveal>
           ))}
