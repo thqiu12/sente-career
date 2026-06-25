@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  SENTE CAREER 先手就職 — brand tokens (locked from VI)
+  Identity is fixed black / paper-white / 先手绿. No auto dark-mode invert:
+  ink blocks are a deliberate brand device, not a separate theme.
+*/
+@theme {
+  --color-ink: #0e0f12;        /* 墨黑 */
+  --color-ink-soft: #16181d;   /* 墨黑(柔) */
+  --color-ink-line: #23252c;   /* 暗部描线 */
+  --color-paper: #f5f3ec;      /* 碁盘米白 */
+  --color-paper-2: #ece9df;    /* 米白(深) */
+  --color-canvas: #ffffff;     /* 纯白 */
+  --color-green: #18d873;      /* 先手绿(主) */
+  --color-green-bright: #2bef88;/* 先手绿(亮·暗底强调) */
+  --color-green-deep: #0a7d45; /* 深绿(暗底上的文字可读) */
+  --color-muted: #6c6a61;      /* 米底正文次级 */
+  --color-muted-d: #8d8a80;    /* 暗底次级 */
+
+  --font-archivo: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-cjk: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC",
+    "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+
+  --radius-card: 4px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-cjk);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-green);
+  color: var(--color-ink);
+}
+
+/* Latin display / wordmark / labels */
+.font-display {
+  font-family: var(--font-archivo);
+}
+
+/* 碁盘网格底纹 — light & dark variants */
+.board-grid {
+  background-image: linear-gradient(rgba(14, 15, 18, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 15, 18, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.board-grid-dark {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* tighten Latin display tracking */
+.tracking-display {
+  letter-spacing: -0.03em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
