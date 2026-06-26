@@ -87,7 +87,7 @@ export function Stone({
 export function CheckerWave({
   className,
   color = "var(--color-green)",
-  lanes = 6,
+  lanes = 5,
   style,
 }: {
   className?: string;
@@ -95,34 +95,61 @@ export function CheckerWave({
   lanes?: number;
   style?: CSSProperties;
 }) {
-  const W = 440;
-  const t = 40; // band thickness = gap
-  const H = lanes * 2 * t;
-  const s1 = W * 0.3; // first seam
-  const s2 = W * 0.6; // second seam
-  const tw = t * 1.35; // S-curve transition width
-  const c = tw * 0.5;
+  const c = 70; // cell size (ribbon thickness = gap = step drop)
+  const flat = c * 1.9; // flat run before each step (blockier checker)
+  const s = c * 0.95; // S-curve transition width
+  const P = flat + s; // horizontal period of one step
+  const e = s * 0.45; // cubic ease handle
+  const W = Math.round(7.4 * c); // ~518
+  const H = lanes * 2 * c;
+  const descent = (Math.ceil(W / P) + 1) * c; // how far a ribbon falls across W
+
+  // one descending-staircase ribbon (thickness c) as a closed path
+  const ribbon = (startY: number, phase: number) => {
+    // top-edge anchors: [x, y, isCurve(from previous)]
+    const a: [number, number, boolean][] = [[0, startY, false]];
+    let x = phase > 0 ? phase : 0;
+    let y = startY;
+    if (phase > 0) a.push([phase, y, false]);
+    while (x < W) {
+      const xe = Math.min(x + s, W);
+      a.push([xe, y + c, true]); // S-curve down by c
+      y += c;
+      x = xe;
+      if (x >= W) break;
+      const xf = Math.min(x + flat, W);
+      a.push([xf, y, false]); // flat run
+      x = xf;
+    }
+    if (a[a.length - 1][0] < W) a.push([W, y, false]);
+
+    // forward (top edge)
+    let d = `M${a[0][0]} ${a[0][1].toFixed(1)}`;
+    for (let i = 1; i < a.length; i++) {
+      const [x1, y1] = a[i - 1];
+      const [x2, y2, curve] = a[i];
+      d += curve
+        ? ` C${(x1 + (x2 - x1) * 0.0 + e).toFixed(1)} ${y1.toFixed(1)} ${(x2 - e).toFixed(1)} ${y2.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`
+        : ` L${x2.toFixed(1)} ${y2.toFixed(1)}`;
+    }
+    // reverse (bottom edge, offset +c)
+    const last = a[a.length - 1];
+    d += ` L${last[0].toFixed(1)} ${(last[1] + c).toFixed(1)}`;
+    for (let i = a.length - 1; i > 0; i--) {
+      const [x1, y1] = a[i - 1];
+      const [x2, y2, curve] = a[i];
+      d += curve
+        ? ` C${(x2 - e).toFixed(1)} ${(y2 + c).toFixed(1)} ${(x1 + e).toFixed(1)} ${(y1 + c).toFixed(1)} ${x1.toFixed(1)} ${(y1 + c).toFixed(1)}`
+        : ` L${x1.toFixed(1)} ${(y1 + c).toFixed(1)}`;
+    }
+    return d + " Z";
+  };
+
   const paths: string[] = [];
-
-  for (let k = 0; k < lanes; k++) {
-    const yt = k * 2 * t; // flat band top
-    const ym = yt + t; // all bands dip down together between the seams
-
-    // top edge: flat -> S to shifted -> flat -> S back -> flat
-    const top =
-      `M0 ${yt} L${s1} ${yt} ` +
-      `C${s1 + c} ${yt} ${s1 + tw - c} ${ym} ${s1 + tw} ${ym} ` +
-      `L${s2} ${ym} ` +
-      `C${s2 + c} ${ym} ${s2 + tw - c} ${yt} ${s2 + tw} ${yt} ` +
-      `L${W} ${yt}`;
-    // bottom edge (offset by +t, traced in reverse)
-    const bot =
-      `L${W} ${yt + t} L${s2 + tw} ${yt + t} ` +
-      `C${s2 + tw - c} ${yt + t} ${s2 + c} ${ym + t} ${s2} ${ym + t} ` +
-      `L${s1 + tw} ${ym + t} ` +
-      `C${s1 + tw - c} ${ym + t} ${s1 + c} ${yt + t} ${s1} ${yt + t} ` +
-      `L0 ${yt + t} Z`;
-    paths.push(top + bot);
+  let idx = 0;
+  for (let startY = -descent; startY < H + c; startY += 2 * c, idx++) {
+    const phase = (idx % 2) * (P / 2); // offset alternate ribbons -> interlock
+    paths.push(ribbon(startY, phase));
   }
 
   return (
