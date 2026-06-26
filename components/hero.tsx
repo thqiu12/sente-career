@@ -1,5 +1,5 @@
 import { Button } from "./button";
-import { StepWave, StarPoints, Stone } from "./brand";
+import { CheckerWave, StarPoints, Stone } from "./brand";
 
 export function Hero() {
   return (
@@ -65,7 +65,7 @@ export function Hero() {
 
         {/* visual column */}
         <div className="relative mx-auto w-full max-w-[420px] lg:max-w-none">
-          <StepWave className="rise relative mx-auto h-[300px] w-auto sm:h-[380px] lg:ml-auto lg:mr-0 lg:h-[440px]" />
+          <CheckerWave className="rise relative mx-auto h-[300px] w-auto sm:h-[380px] lg:ml-auto lg:mr-0 lg:h-[460px]" />
           <Stone
             variant="green"
             className="absolute -bottom-2 left-2 h-14 w-14 shadow-[0_18px_40px_rgba(0,0,0,0.5)] lg:left-6"

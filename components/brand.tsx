@@ -80,11 +80,11 @@ export function Stone({
 }
 
 /* ------------------------------------------------------------------ */
-/*  StepWave - the signature rising/woven band motif.                  */
-/*  Stacked green bands that each step up via an S-curve, staggered    */
-/*  diagonally => 前进 / 领先一步.                                      */
+/*  CheckerWave — faithful reproduction of the VI / deck motif:         */
+/*  stacked green bands that step up/down at aligned seams, interlocking */
+/*  with the white gaps into a woven checkerboard of rounded squares.    */
 /* ------------------------------------------------------------------ */
-export function StepWave({
+export function CheckerWave({
   className,
   color = "var(--color-green)",
   lanes = 6,
@@ -95,32 +95,34 @@ export function StepWave({
   lanes?: number;
   style?: CSSProperties;
 }) {
-  const W = 400;
-  const H = 460;
-  const bh = H / (lanes * 2 - 1); // band thickness; gaps equal to bands
-  const pitch = bh * 2; // vertical distance between band tops
-  const riseW = bh * 1.6; // horizontal length of the S riser
+  const W = 440;
+  const t = 40; // band thickness = gap
+  const H = lanes * 2 * t;
+  const s1 = W * 0.3; // first seam
+  const s2 = W * 0.6; // second seam
+  const tw = t * 1.35; // S-curve transition width
+  const c = tw * 0.5;
   const paths: string[] = [];
 
   for (let k = 0; k < lanes; k++) {
-    const yTop = H - bh - k * pitch; // top edge of this band's lower (left) part
-    const yHi = yTop - pitch; // top edge after the step up
-    // stagger the riser diagonally across the canvas
-    const riseX = W * 0.12 + (k * (W * 0.62)) / (lanes - 1);
-    const xa = riseX;
-    const xb = riseX + riseW;
-    const d = [
-      `M0 ${yTop}`,
-      `L${xa} ${yTop}`,
-      `C${xa + riseW * 0.45} ${yTop} ${xb - riseW * 0.45} ${yHi} ${xb} ${yHi}`,
-      `L${W} ${yHi}`,
-      `L${W} ${yHi + bh}`,
-      `L${xb} ${yHi + bh}`,
-      `C${xb - riseW * 0.45} ${yHi + bh} ${xa + riseW * 0.45} ${yTop + bh} ${xa} ${yTop + bh}`,
-      `L0 ${yTop + bh}`,
-      "Z",
-    ].join(" ");
-    paths.push(d);
+    const yt = k * 2 * t; // flat band top
+    const ym = yt + t; // all bands dip down together between the seams
+
+    // top edge: flat -> S to shifted -> flat -> S back -> flat
+    const top =
+      `M0 ${yt} L${s1} ${yt} ` +
+      `C${s1 + c} ${yt} ${s1 + tw - c} ${ym} ${s1 + tw} ${ym} ` +
+      `L${s2} ${ym} ` +
+      `C${s2 + c} ${ym} ${s2 + tw - c} ${yt} ${s2 + tw} ${yt} ` +
+      `L${W} ${yt}`;
+    // bottom edge (offset by +t, traced in reverse)
+    const bot =
+      `L${W} ${yt + t} L${s2 + tw} ${yt + t} ` +
+      `C${s2 + tw - c} ${yt + t} ${s2 + c} ${ym + t} ${s2} ${ym + t} ` +
+      `L${s1 + tw} ${ym + t} ` +
+      `C${s1 + tw - c} ${ym + t} ${s1 + c} ${yt + t} ${s1} ${yt + t} ` +
+      `L0 ${yt + t} Z`;
+    paths.push(top + bot);
   }
 
   return (

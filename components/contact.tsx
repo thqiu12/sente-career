@@ -1,12 +1,12 @@
 import { Reveal } from "./reveal";
-import { StepWave, Stone } from "./brand";
+import { CheckerWave, Stone } from "./brand";
 import { QrCode } from "@phosphor-icons/react/dist/ssr";
 
 export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden bg-ink text-paper">
       <div className="board-grid-dark absolute inset-0" aria-hidden />
-      <StepWave
+      <CheckerWave
         className="pointer-events-none absolute -bottom-10 -left-16 h-[340px] w-auto opacity-[0.16]"
         lanes={5}
       />

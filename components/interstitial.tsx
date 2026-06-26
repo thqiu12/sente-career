@@ -1,5 +1,5 @@
 import { Reveal } from "./reveal";
-import { StepWave } from "./brand";
+import { CheckerWave } from "./brand";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 
 /*
@@ -28,7 +28,7 @@ export function Interstitial() {
       </div>
 
       {/* checker wave on the right (dial opacity down if you add a photo) */}
-      <StepWave
+      <CheckerWave
         className="pointer-events-none absolute -right-10 top-1/2 hidden h-[150%] w-auto -translate-y-1/2 opacity-80 lg:block"
         lanes={6}
       />
