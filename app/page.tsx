@@ -8,6 +8,7 @@ import { Programs } from "@/components/programs";
 import { Toolkit } from "@/components/toolkit";
 import { Process } from "@/components/process";
 import { Why } from "@/components/why";
+import { Interstitial } from "@/components/interstitial";
 import { Faq } from "@/components/faq";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
@@ -26,6 +27,7 @@ export default function Home() {
         <Toolkit />
         <Process />
         <Why />
+        <Interstitial />
         <Faq />
         <Contact />
       </main>
